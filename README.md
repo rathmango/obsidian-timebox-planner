@@ -1,70 +1,124 @@
 # Timebox Planner
 
-`Timebox Planner`는 Obsidian Daily note 안에서 `Brain Dump -> Top Priorities -> Time Boxes`를 한 흐름으로 이어주는 데스크톱 전용 플러그인입니다.
+An Obsidian plugin that brings **Brain Dump → Top Priorities → Time Boxes** into your Daily note as a single, unified view. Desktop only.
 
-새로운 일정 앱을 하나 더 여는 대신, 이미 매일 쓰는 노트 안에서 오늘 할 일과 시간을 함께 정리하는 데 초점을 맞췄습니다. 일반적인 캘린더 대체제가 아니라, Daily note 기반의 실행 루틴을 더 쉽게 만드는 작은 도구입니다.
+Instead of opening yet another scheduling app, plan your day right where you already take notes.
 
-![Timebox Planner workflow demo](assets/demo.gif)
+![Workflow Demo](assets/demo.gif)
 
-## 왜 만들었나
+## What is Timeboxing?
 
-- AI 덕분에 실행 속도는 빨라졌지만, 하루 우선순위는 더 쉽게 흐려졌습니다.
-- 할 일 목록만 길어지는 대신, 오늘 실제로 쓸 시간을 먼저 고정하고 싶었습니다.
-- 별도 도구가 아니라 Obsidian Daily note 안에서 바로 timeboxing 하고 싶었습니다.
-- 개인용 생산성 도구이면서, 작은 팀에서 서로의 하루 맥락을 가볍게 공유하는 용도로도 쓰고 있습니다.
+Timeboxing is a time management method where you **fix the time first, then assign tasks to it** — the opposite of a traditional to-do list.
 
-## 핵심 워크플로우
+Elon Musk is well known for using timeboxing to run Tesla, SpaceX, X, and other companies simultaneously. Rather than maintaining an open-ended task list, he designs his schedule around fixed time blocks and focuses on one problem at a time within each block.
 
-1. `Brain Dump`에 떠오르는 일을 한 줄씩 적습니다.
-2. 오늘 반드시 밀어야 할 1~3개를 `Top Priorities`로 고릅니다.
-3. 우측 30분 슬롯에 끌어 놓아 `Time Boxes`로 배치합니다.
+### Why To-do Lists Fall Short
 
-## 현재 MVP 기능
+A to-do list has no concept of **time**. When 10 items sit on a list, the prefrontal cortex burns energy constantly deciding "which one first?" Research from Columbia University shows that **the more choices you have, the less likely you are to act on any of them** (decision fatigue).
 
-- 우측 사이드바에 `Timebox Planner` 전용 뷰 열기
-- `Top Priorities` 3칸 편집
-- `Brain Dump` 항목 추가, 수정, 삭제
-- `Brain Dump` 항목을 `Top Priorities`로 복사
-- 카드 선택 후 빈 슬롯 클릭으로 빠른 배치
-- 카드를 30분 슬롯으로 드래그해 블록 생성
-- 수동 블록 생성, 이동, `+30` / `-30` 리사이즈, 삭제
-- 활성 노트의 `Top Priorities` / `Brain Dump` 섹션과 플래너 데이터를 자동 동기화
-- Markdown 본문을 사람이 읽을 수 있는 형태로 유지하면서, 추가 데이터는 숨은 주석으로 저장
+### Why Timeboxing Works
 
-## 설치 방법
+**Zeigarnik Effect → Brain Dump**
+The brain keeps replaying unfinished tasks, draining mental energy in the background. Writing everything down signals the brain that it no longer needs to hold on, reducing anxiety and freeing up working memory.
 
-현재는 수동 설치 방식만 지원합니다.
+**4 Disciplines of Execution → Big 3**
+The more goals you pursue simultaneously, the worse your results. Picking just 3 priorities per day forces focus and dramatically increases completion rates.
 
-1. `manifest.json`, `main.js`, `styles.css`를 같은 폴더에 둡니다.
-2. 해당 폴더를 `VaultFolder/.obsidian/plugins/timebox-planner/`에 넣습니다.
-3. Obsidian에서 Community Plugins를 켜고 `Timebox Planner`를 활성화합니다.
-4. 명령어 팔레트에서 `Open Timebox Planner`를 실행합니다.
-5. Daily note를 연 상태에서 `Brain Dump -> Top Priorities -> Time Boxes` 흐름으로 사용합니다.
+**Time Boundary Effect → Timebox**
+"Write draft" is vague. "5:30 AM – 7:00 AM: Write draft" is a boundary. Once a task has a concrete time slot, the brain stops deliberating and starts executing. Reactive time and focused time become structurally separated.
 
-## 데이터 저장 방식
+### To-do List vs Timeboxing
 
-플러그인은 활성 노트 안에 다음 정보를 저장합니다.
+| | To-do List | Timeboxing |
+|---|---|---|
+| Core question | "What should I do today?" | "Where should I spend my time?" |
+| Prioritization | Gets blurry as the list grows | Forced by finite time |
+| Execution | Order is flexible (and often procrastinated) | Fixed start time — just begin |
+| Limitation | No idea how long each item takes | Must estimate duration upfront |
 
-- 사람이 읽는 섹션: `## Top Priorities`, `## Brain Dump`
-- 기계가 읽는 데이터: `<!-- timebox-planner:data ... -->`
+## How It Works
 
-기존처럼 노트 본문은 계속 읽을 수 있고, 블록 위치와 연결 정보만 별도 데이터로 보존합니다.
+### Step 1. Brain Dump
 
-## 현재 제약
+![Step 1: Brain Dump](assets/step1-brain-dump.gif)
+
+Write down everything on your mind — tasks, worries, ideas. No filtering, no ordering. The goal is to **empty your working memory** so the Zeigarnik effect stops draining you.
+
+### Step 2. Top Priorities (Big 3)
+
+![Step 2: Top Priorities](assets/step2-top-priorities.gif)
+
+Pick the 1–3 items from Brain Dump that **must** move forward today. The key decision here is not what to do, but **what not to do today**. Drag a Brain Dump card onto a Priority slot to copy it.
+
+### Step 3. Time Boxes
+
+![Step 3: Time Boxes](assets/step3-time-boxes.gif)
+
+Place your priorities onto 30-minute time slots on the right panel. You can drag cards directly, or select a card then click an empty slot. Blocks can be resized with `+30` / `-30` or moved by dragging.
+
+Once placed, your day's plan is visually locked in. The finite time makes it obvious what doesn't fit.
+
+## Features (MVP)
+
+- Dedicated `Timebox Planner` view inside Obsidian
+- `Top Priorities` — 3 editable slots
+- `Brain Dump` — add, edit, delete items
+- Drag from Brain Dump to Top Priorities
+- Drag or click-to-place cards onto 30-min time slots
+- Create, move, resize (`+30` / `-30`), and delete time blocks
+- Auto-syncs with `## Top Priorities` / `## Brain Dump` sections in the active note
+- Human-readable Markdown; machine data stored in hidden HTML comments (`<!-- timebox-planner:data ... -->`)
+
+## Installation
+
+Manual install only (not yet registered as a community plugin).
+
+1. Download the zip from the [Releases page](https://github.com/rathmango/obsidian-timebox-planner/releases).
+2. Extract `manifest.json`, `main.js`, and `styles.css` into a single folder.
+3. Place the folder at `<YourVault>/.obsidian/plugins/timebox-planner/`.
+4. In Obsidian, enable Community Plugins and activate **Timebox Planner**.
+5. Open the Command Palette and run `Open Timebox Planner`.
+
+## Data Storage
+
+The plugin stores data inside the active note:
+
+- **Human-readable**: `## Top Priorities`, `## Brain Dump` sections
+- **Machine-readable**: `<!-- timebox-planner:data ... -->` HTML comment
+
+Your note stays readable even without the plugin.
+
+## Current Limitations
 
 - Desktop only
-- 정식 커뮤니티 플러그인 등록 전
-- 설정 화면 없음
-- 외부 일정 연동 없음
-- 아직은 실사용 기준으로 다듬는 MVP 단계
+- Not yet in the Obsidian community plugin registry
+- No settings UI
+- No external calendar integration
+- MVP stage — actively being refined for daily use
 
-## 공개 방향
+## References
 
-1차 목표는 `public GitHub repo + Release zip` 형태의 공개 베타입니다. 반응이 괜찮으면 그다음에 Obsidian 커뮤니티 플러그인 등록을 검토하는 흐름을 생각하고 있습니다.
+- [To-do list makes things worse — Elon Musk's time management method (Korean)](https://www.youtube.com/watch?v=KVNYJoIbS-c)
+- [Elon Musk's Timeboxing Technique (Korean)](https://www.youtube.com/watch?v=kX3EnAayzDo)
+- [HBR: How Timeboxing Works and Why It Will Make You More Productive](https://hbr.org/2018/12/how-timeboxing-works-and-why-it-will-make-you-more-productive)
 
-공개 준비 절차는 `PUBLIC_RELEASE_CHECKLIST.md`에 정리해 두었습니다.
+---
 
-## 메모
+## 한국어 안내
 
-- 스크린샷 / GIF는 공개용 repo에서 추가 예정
-- 라이선스는 공개 범위에 맞춰 별도 결정 필요
+Obsidian Daily note 안에서 **Brain Dump → Top Priorities → Time Boxes**를 한 흐름으로 이어주는 데스크톱 전용 플러그인입니다.
+
+일론 머스크가 테슬라, 스페이스X 등 여러 회사를 동시에 운영하면서 활용하는 것으로 알려진 타임박싱(Timeboxing) 기법을, 별도 앱 없이 Obsidian Daily note 안에서 바로 실행할 수 있습니다.
+
+### 3단계 워크플로우
+
+1. **Brain Dump** — 머릿속 할 일을 전부 꺼냅니다 (자이가르닉 효과 해소)
+2. **Top Priorities (Big 3)** — 오늘 반드시 밀어야 할 1~3개만 고릅니다
+3. **Time Boxes** — 선택한 항목을 시간표에 배치합니다
+
+### 설치
+
+1. [Release 페이지](https://github.com/rathmango/obsidian-timebox-planner/releases)에서 zip 다운로드
+2. `manifest.json`, `main.js`, `styles.css`를 `<Vault>/.obsidian/plugins/timebox-planner/`에 배치
+3. Obsidian → Community Plugins → **Timebox Planner** 활성화
+4. 명령어 팔레트 → `Open Timebox Planner`

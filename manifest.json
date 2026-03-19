@@ -1,0 +1,9 @@
+{
+  "id": "timebox-planner",
+  "name": "Timebox Planner",
+  "version": "0.0.1",
+  "minAppVersion": "1.5.0",
+  "description": "Paper-style daily timeboxing planner for Obsidian.",
+  "author": "Mingyu",
+  "isDesktopOnly": true
+}

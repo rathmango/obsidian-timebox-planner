@@ -1,4 +1,4 @@
-# Timebox Planner
+# Timebox Planner for Obsidian
 
 An Obsidian plugin that brings **Brain Dump → Top Priorities → Time Boxes** into your Daily note as a single, unified view. Desktop only.
 
